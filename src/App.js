@@ -1,26 +1,32 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component, Fragment } from 'react';
+import { ThemeProvider } from 'styled-components';
+import GlogalStyle from './global';
+import theme from './theme';
+import Header from './components/Header';
+import Hero from './components/Hero';
+import About from './components/About';
+import Requirements from './components/Requirements';
+import Users from './components/Users';
+import Registration from './components/Registration';
+import Footer from './components/Footer';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <Fragment>
+        <GlogalStyle />
+        <ThemeProvider theme={theme}>
+          <Fragment>
+            <Header />
+            <Hero />
+            <About />
+            <Requirements />
+            <Users />
+            <Registration />
+            <Footer />
+          </Fragment>
+        </ThemeProvider>
+      </Fragment>
     );
   }
 }
