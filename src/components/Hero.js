@@ -24,6 +24,7 @@ const Wrapper = styled(Section)`
     background-image: url(${bg});
     background-size: 134%;
     background-position: center 30%;
+    background-repeat: no-repeat;
     color: #ffffff;
 
     ${Container} {

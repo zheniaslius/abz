@@ -33,6 +33,7 @@ const RequirementsSection = styled(Section)`
     padding-bottom: 107px;
     background-image: url(${bg});
     background-size: cover;
+    background-repeat: no-repeat;
     background-position-y: 46%;
     color: white;
 
