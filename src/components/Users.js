@@ -36,9 +36,7 @@ class Users extends Component {
 
         if (this.isLastPage()) return;
         
-        if (reset) {
-            this.setState({users: data.users})
-        }
+        if (reset) this.setState({users: data.users})
         else this.updateUsers(data.users);
     }
     

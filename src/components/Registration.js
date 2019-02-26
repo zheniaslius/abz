@@ -46,7 +46,6 @@ class Registration extends Component {
         if ((image.size > 2000 && image.size < 5000000) &&
             (image.type === 'image/jpeg') &&
             (dimens.every(dim => dim > 70))) {
-                console.log('its okay')
                 this.setState({image})
             }
         else this.setState({image: false})
