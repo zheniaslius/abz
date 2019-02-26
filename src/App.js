@@ -11,6 +11,20 @@ import Registration from './components/Registration';
 import Footer from './components/Footer';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      resetUsers: false
+    }
+  }
+  
+  reset = () => this.setState({resetUsers: true})
+
+  componentDidUpdate() {
+    if (!this.state.resetUsers) return;
+    this.setState({resetUsers: false});
+  }
+  
   render() {
     return (
       <Fragment>
@@ -21,8 +35,8 @@ class App extends Component {
             <Hero />
             <About />
             <Requirements />
-            <Users />
-            <Registration />
+            <Users resetUsers={this.state.resetUsers}/>
+            <Registration reset={this.reset}/>
             <Footer />
           </Fragment>
         </ThemeProvider>

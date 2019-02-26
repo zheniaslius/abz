@@ -41,6 +41,11 @@ const RequirementsSection = styled(Section)`
         padding-top: 105px;
     `}
 
+    ${media.phone`
+        padding-top: 75px;
+        text-align: center;
+    `}
+
     h2 {
         margin-bottom: 36px;
         text-align: center;
@@ -48,6 +53,10 @@ const RequirementsSection = styled(Section)`
         ${media.tablet`
             max-width: 58%;
             margin: 0 auto 35px;
+        `}
+
+        ${media.tablet`
+            max-width: 100%;
         `}
     }
 `;
@@ -59,6 +68,11 @@ const Wrapper = styled.div`
         align-items: flex-start;
     `}
 
+    ${media.phone`
+        flex-direction: column;
+        align-items: center;
+    `}
+
     > * {
         flex: 1;
     }
@@ -66,6 +80,11 @@ const Wrapper = styled.div`
     ${MediumParagraph} {
         ${media.tablet`
             padding-right: 30px;
+        `}
+
+        ${media.phone`
+            order: 2;
+            padding: 0;
         `}
     }
 `;
@@ -81,6 +100,12 @@ const ImageContainer = styled.div`
         ${media.tablet`
             height: 100%;
             padding-left: 0;
+        `}
+
+        ${media.phone`
+            order: 1;
+            margin-bottom: 30px;
+            width: 90%;
         `}
     }
 `;

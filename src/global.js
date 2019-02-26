@@ -12,6 +12,7 @@ const GlogalStyle = createGlobalStyle`
 
     h1, h2, h3, h4, h5, p {
         margin: 0;
+        text-overflow: ellipsis;
     }
 
     h1 {
@@ -20,14 +21,26 @@ const GlogalStyle = createGlobalStyle`
         ${media.tablet`
             font-size: 42px;
         `}
+
+        ${media.phone`
+            font-size: 30px;
+        `}
     }
 
     h2 {
         font: 600 42px 'Overpass';
+
+        ${media.phone`
+            font-size: 26px;
+        `}
     }
 
     h3 {
         font: 600 26px 'Overpass';
+
+        ${media.phone`
+            font-size: 22px;
+        `}
     }
 
     h4 {
@@ -44,6 +57,7 @@ const GlogalStyle = createGlobalStyle`
     
     button {
         padding: 0;
+        outline: none;
     }
 
     ul, hr {

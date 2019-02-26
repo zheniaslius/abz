@@ -1,76 +1,74 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
-import { Container, Button, Section,
- SmallParagraph } from './shared/shared';
-import user from '../assets/imgs/user-adolph-2x.png';
+import { Container, Button, Section } from './shared/shared';
 import media from './shared/media';
+import User from '../components/User';
+import url from '../api';
 
-const Users = () => {
-    return (
-        <UsersSection>
-            <Container id="users">
-                <h2>Our cheerful users</h2>
-                <h5>Attention! Sorting users by registration date</h5>
-                <UsersWrapper>
-                    <User>
-                        <Photo src={user}/>
-                        <Details>
-                            <h3>Noah</h3>
-                            <SmallParagraph>Leading specialist of the Control Department</SmallParagraph>
-                            <SmallParagraph>noah.controldepartment@gmail.com  </SmallParagraph>
-                            <SmallParagraph>+38 (050) 678 03 24</SmallParagraph>
-                        </Details>
-                    </User>
-                    <User>
-                        <Photo src={user}/>
-                        <Details>
-                            <h3>Noah</h3>
-                            <SmallParagraph>Leading specialist of the Control Department</SmallParagraph>
-                            <SmallParagraph>noah.controldepartment@gmail.com  </SmallParagraph>
-                            <SmallParagraph>+38 (050) 678 03 24</SmallParagraph>
-                        </Details>
-                    </User>
-                    <User>
-                        <Photo src={user}/>
-                        <Details>
-                            <h3>Noah</h3>
-                            <SmallParagraph>Leading specialist of the Control Department</SmallParagraph>
-                            <SmallParagraph>noah.controldepartment@gmail.com  </SmallParagraph>
-                            <SmallParagraph>+38 (050) 678 03 24</SmallParagraph>
-                        </Details>
-                    </User>
-                    <User>
-                        <Photo src={user}/>
-                        <Details>
-                            <h3>Noah</h3>
-                            <SmallParagraph>Leading specialist of the Control Department</SmallParagraph>
-                            <SmallParagraph>noah.controldepartment@gmail.com  </SmallParagraph>
-                            <SmallParagraph>+38 (050) 678 03 24</SmallParagraph>
-                        </Details>
-                    </User>
-                    <User>
-                        <Photo src={user}/>
-                        <Details>
-                            <h3>Noah</h3>
-                            <SmallParagraph>Leading specialist of the Control Department</SmallParagraph>
-                            <SmallParagraph>noah.controldepartment@gmail.com  </SmallParagraph>
-                            <SmallParagraph>+38 (050) 678 03 24</SmallParagraph>
-                        </Details>
-                    </User>
-                    <User>
-                        <Photo src={user}/>
-                        <Details>
-                            <h3>Noah</h3>
-                            <SmallParagraph>Leading specialist of the Control Department</SmallParagraph>
-                            <SmallParagraph>noah.controldepartment@gmail.com  </SmallParagraph>
-                            <SmallParagraph>+38 (050) 678 03 24</SmallParagraph>
-                        </Details>
-                    </User>
-                </UsersWrapper>
-                <Button secondary>Show more</Button>
-            </Container>
-        </UsersSection>
-    );
+class Users extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            users: [],
+            page: 1
+        }
+        this.totalPages = 0;
+    }
+
+    componentDidMount() {
+        this.getUsers();
+    }
+
+    componentDidUpdate() {
+        if (this.props.resetUsers) {
+            this.getUsers({reset: true});
+        }
+    }
+    
+    isLastPage = () => this.state.page === this.totalPages
+
+    getUsers = async({reset = false} = {}) => { 
+        if (reset) this.setState({page: 1});
+
+        const res = await fetch(`${url}/users?page=${this.state.page}&count=6`);
+        const data = await res.json();
+        this.totalPages = data.total_pages;
+
+        if (this.isLastPage()) return;
+        
+        if (reset) {
+            this.setState({users: data.users})
+        }
+        else this.updateUsers(data.users);
+    }
+    
+    updateUsers = newUsers => {
+        const { users, page } = this.state;
+        this.setState({
+            users: [...users, ...newUsers],
+            page: page + 1 
+        });
+    }
+
+    render() {
+        const { users } = this.state;
+        const lastPage = this.isLastPage();
+        
+        return (
+            <UsersSection>
+                <Container id="users">
+                    <h2>Our cheerful users</h2>
+                    <h5>Attention! Sorting users by registration date</h5>
+                    <UsersWrapper>
+                        {
+                            users.map(user => <User key={user.id} {...user} />)
+                        }
+                    </UsersWrapper>
+                    {!lastPage && <Button secondary onClick={this.getUsers}>Show more</Button>}
+                </Container>
+            </UsersSection>
+        );
+    }
 };
 
 export default Users;
@@ -90,6 +88,11 @@ const UsersSection = styled(Section)`
         ${media.tablet`
             margin-bottom: 35px;
         `}
+
+        ${media.phone`
+            max-width: 67%;
+            margin: 0 auto 35px;
+        `}
     }
 
     ${Button} {
@@ -98,54 +101,19 @@ const UsersSection = styled(Section)`
         ${media.tablet`
             margin-top: 78px;
         `}
+
+        ${media.phone`
+            margin-top: 0;
+        `}
     }
 `;
 
 const UsersWrapper = styled.div`
-    display: flex;
-    flex-wrap: wrap;
-    margin-bottom: -80px;
-`;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-gap: 60px 50px;
 
-const User = styled.div`
-    display: flex;
-    flex-basis: 33.3%;
-    margin-bottom: 80px;
-
-    ${media.tablet`
-        flex-direction: column;
-        align-items: center;
-        margin-bottom: 47px;
-    `}
-`;
-
-const Photo = styled.img`
-    margin-right: 8px;
-    height: 70px;
-    width: 70px;
-    border-radius: 50%;
-
-    ${media.tablet`
-        margin-right: 0;
-    `}
-`;
-
-const Details = styled.div`
-    margin-top: 27px;
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-
-    h3 {
-        font-weight: 700;
-
-        ${media.tablet`
-            font-size: 22px;
-        `}
-    }
-
-    ${media.tablet`
-        text-align: center;
-        margin-top: 11px;
+    ${media.phone`
+        grid-row-gap: 30px;
     `}
 `;

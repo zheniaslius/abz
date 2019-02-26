@@ -7,8 +7,20 @@ export const Container = styled.div`
     margin: 0 auto;
     width: 100%;
 
+    @media (max-width: 1200px) {
+        max-width: 960px;
+    }
+
+    @media (max-width: 992px) {
+        max-width: 720px;
+    }
+
     ${media.tablet`
         padding: 0 25px;
+    `}
+
+    ${media.phone`
+        padding: 0 15px;
     `}
 `;
 
@@ -17,6 +29,10 @@ export const Section = styled.section`
 
     ${media.tablet`
         padding: 118px 0;
+    `}
+
+    ${media.phone`
+        padding: 75px 0 70px 0;
     `}
 `;
 
@@ -50,6 +66,10 @@ export const Button = styled.button`
     &:hover {
         background-color: ${props => props.primary ? '#fc831f' : props.secondary ? '#fee6d2' : '#d7d7d7'};
     }
+
+    ${media.phone`
+        width: 270px;
+    `}
 `;
 
 export const TextButton = styled.button`
@@ -61,7 +81,7 @@ export const TextButton = styled.button`
     color: ${props => props.theme.primary};
 
     &:hover {
-        color: '#fc831f';
+        color: #fc831f;
     }
 `;
 
@@ -69,6 +89,11 @@ export const Input = styled.input`
     padding: 18px 17px;
     border-radius: 4px;
     border: 1px solid #b7b7b7;
+    outline: none;
+
+    :focus {
+        border-width: 2px;
+    }
 
     ::placeholder {
         color: #8d8c8c;
@@ -96,6 +121,11 @@ export const Link = styled.li`
     a {
         text-decoration: none;
         color: ${props => props.white ? '#ffffff' : 'black'};
+
+        :hover {
+            color: ${props => props.theme.primary};
+            transition: color .2s;
+        }
     }
 
     

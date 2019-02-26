@@ -91,16 +91,37 @@ const FooterContainer = styled.footer`
     color: #ffffff;
 `;
 
+const Logo = styled(logo)`
+    width: 134px;
+    fill: #ffffff !important;
+`;
+
 const NavWrapper = styled.nav`
     padding: 30px 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
-`;
 
-const Logo = styled(logo)`
-    width: 134px;
-    fill: #ffffff !important;
+    ${media.phone`
+        flex-direction: column;
+
+        ${Logo} {
+            margin-bottom: 20px;
+        }
+    `}
+
+    ${Nav} {
+        ${media.phone`
+            flex-direction: column;
+            align-items: center;
+        `}
+
+        ${Link} {
+            ${media.phone`
+                margin: 0 0 13px;
+            `}
+        }
+    }
 `;
 
 const Line = styled.hr`
@@ -113,9 +134,19 @@ const FooterMain = styled.div`
     margin: 30px 0 11px;
     display: flex;
     justify-content: space-between;
+
+    ${media.phone`
+        justify-content: center;
+    `}
 `;
 
-const Contacts = styled.div``;
+const Contacts = styled.div`
+    ${media.phone`
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    `}
+`;
 
 const ContactBy = styled.div`
     display: flex;
@@ -150,10 +181,18 @@ const Links = styled.div`
     flex-wrap: wrap;
     flex: 1;
     justify-content: space-between;
-    padding-left: 67px;
+    padding-left: 21%;
+
+    @media (max-width: 992px) {
+        padding-left: 11%;
+    }
 
     ${media.tablet`
         padding-left: 90px;
+    `}
+
+    ${media.phone`
+        display: none;
     `}
 
     ul {
@@ -175,6 +214,10 @@ const FooterEnd = styled.div`
     align-items: center;
     padding-bottom: 32px;
 
+    ${media.phone`
+        flex-direction: column-reverse;
+    `}
+
     span {
         font-size: 12px;
     }
@@ -182,8 +225,17 @@ const FooterEnd = styled.div`
 
 const Social = styled.div`
     display: flex;
+
+    ${media.phone`
+        margin-bottom: 19px;
+    `}
 `; 
 
 const Icon = styled.div`
     margin-left: 20px;
+    cursor: pointer;
+
+    :hover svg g {
+        fill: ${props => props.theme.primary};
+    }
 `; 

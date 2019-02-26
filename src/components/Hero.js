@@ -10,7 +10,7 @@ const Hero = () => {
             <Container>
                 <Content>
                     <h1>Test assignment for Frontend Developer position</h1>
-                    <LargeParagraph>We kindly remind you that your test assignment should be submitted as a link to github/bitbucket repository. Please be patient, we consider and respond to every application that meets minimum requirements. We look forward to your submission. Good luck!</LargeParagraph>
+                    <LargeParagraph>We kindly remind you that your test assignment should be submitted as a link to github/bitbucket repository. <span>Please be patient, we consider and respond to every application that meets minimum requirements. We look forward to your submission. Good luck!</span></LargeParagraph>
                     <Button primary>Sign Up</Button>
                 </Content>
             </Container>
@@ -22,7 +22,7 @@ export default Hero;
 
 const Wrapper = styled(Section)`
     background-image: url(${bg});
-    background-size: 134%;
+    background-size: cover;
     background-position: center 30%;
     background-repeat: no-repeat;
     color: #ffffff;
@@ -37,6 +37,11 @@ const Content = styled.div`
 
     ${media.tablet`
         max-width: 53%;
+    `}
+
+    ${media.phone`
+        max-width: 100%;
+        text-align: center;
     `}
 
     h1 {
@@ -55,6 +60,12 @@ const Content = styled.div`
 
         ${media.tablet`
             font-size: 18px;
+        `}
+
+        ${media.phone`
+            > span {
+                display: none;
+            }
         `}
     }
 `;

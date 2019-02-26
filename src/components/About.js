@@ -59,15 +59,26 @@ const AboutSection = styled(Section)`
         text-align: center;
         max-width: 532px;
         margin: 0 auto 37px;
-    }`
-;
+    }
+
+    ${media.phone`
+        text-align: center;
+    `};
+`;
 
 const Description = styled.div`
     display: flex;
     margin: 0 0 75px 36px;
+
     ${media.tablet`
         margin: 0 0 141px 0;
         align-items: flex-start;
+    `}
+
+    ${media.phone`
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 70px;
     `}
 
     img {
@@ -77,6 +88,16 @@ const Description = styled.div`
             width: 216px;
             margin-right: 35px;
         `}
+
+        ${media.phone`
+            margin: 0 0 30px;
+        `}
+    }
+
+    h3 {
+        ${media.phone`
+            margin-bottom: 20px;
+        `}
     }
 
     ${MediumParagraph} {
@@ -84,7 +105,14 @@ const Description = styled.div`
     }
 `;
 
-const Info = styled.div``;
+const Info = styled.div`
+    ${media.phone`
+        h3 {
+            max-width: 70%;
+            margin: 0 auto 20px;
+        }`
+    }
+`;
 
 const Skills = styled.div``;
 
@@ -95,6 +123,10 @@ const SkillsWrapper = styled.div`
     ${media.tablet`
         flex-direction: column;
         padding: 0 9%;
+    `}
+
+    ${media.phone`
+        padding: 0;
     `}
 `;
 
@@ -110,12 +142,21 @@ const Skill = styled.div`
         }
     `}
 
+    ${media.phone`
+        flex-direction: column;
+        align-items: center;
+    `}
+
     img {
         margin-bottom: 25px;
         width: 98px;
 
         ${media.tablet`
             margin: 0 29px 0 0;
+        `}
+
+        ${media.phone`
+            margin: 0 0 15px;
         `}
     }
 
