@@ -20,8 +20,8 @@ class App extends Component {
   
   reset = () => this.setState({resetUsers: true})
 
-  componentDidUpdate() {
-    if (!this.state.resetUsers) return;
+  componentDidUpdate(prevProps, prevState) {
+    if (!prevState.resetUsers) return;
     this.setState({resetUsers: false});
   }
   

@@ -101,6 +101,16 @@ export const Input = styled.input`
     }
 `;  
 
+export const Fade = styled.div`
+    display: ${props => props.show ? 'block' : 'none'};
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0,0,0,.2);
+`;
+
 export const Logo = styled.img`
     width: 134px;
 `;

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { Container, Button, Section, Input } from './shared/shared';
+import { Container, Button, Section, Input,
+TextButton, Fade } from './shared/shared';
 import media from './shared/media';
 import { ReactComponent as Upload} from '../assets/icons/upload.svg';
 import down from '../assets/icons/caret-down.svg';
@@ -12,6 +13,7 @@ class Registration extends Component {
         super(props);
         this.fileInput = React.createRef();
         this.state= {
+            showModal: false,
             positions: [],
             positionId: null,
             name: null,
@@ -86,7 +88,10 @@ class Registration extends Component {
             headers: new Headers({'Token': await this.getToken()}),
             body: formData
         })
-            .then(this.props.reset())
+            .then(() => {
+                this.setState({showModal: true})
+                this.props.reset()
+            })
             .catch(error => console.log(error))
     }
 
@@ -143,8 +148,19 @@ class Registration extends Component {
                             </InputWrapper>
                         </Row>
                     </FormsWrapper>
-                    <SignUp onClick={this.registerUser}>Sign Up</SignUp>
+                    <SignUp secondary onClick={this.registerUser}>Sign Up</SignUp>
                 </Container>
+                <Fade 
+                    show={this.state.showModal}
+                    onClick={() => this.setState({showModal: false})}
+                />
+                <Modal show={this.state.showModal}>
+                    <h4>Congratulations</h4>
+                    <p>You have successfully passed the registration</p>
+                    <TextButton onClick={() => this.setState({showModal: false})}>
+                        OK
+                    </TextButton>
+                </Modal>
             </RegistrationSection>
         );
     }
@@ -325,4 +341,30 @@ const Select = styled(Input)`
     background-repeat: no-repeat;
     background-position-y: 50%;
     background-position-x: 97%;
+`;
+
+const Modal = styled.div`
+    display: ${props => props.show ? 'flex' : 'none'};
+    border-radius: 4px;
+    z-index: 100;
+    width: 290px;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    background-color: #ffffff;
+    padding: 25px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+
+    p {
+        max-width: 85%;
+        margin-bottom: 35px;
+    }
+
+    button {
+        align-self: flex-end;
+    }
 `;

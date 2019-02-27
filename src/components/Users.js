@@ -28,15 +28,14 @@ class Users extends Component {
     isLastPage = () => this.state.page === this.totalPages
 
     getUsers = async({reset = false} = {}) => { 
-        if (reset) this.setState({page: 1});
-
-        const res = await fetch(`${url}/users?page=${this.state.page}&count=6`);
+        const page = reset ? 1 : this.state.page;
+        const res = await fetch(`${url}/users?page=${page}&count=6`);
         const data = await res.json();
         this.totalPages = data.total_pages;
 
         if (this.isLastPage()) return;
         
-        if (reset) this.setState({users: data.users})
+        if (reset) this.setState({users: data.users, page: 2})
         else this.updateUsers(data.users);
     }
     

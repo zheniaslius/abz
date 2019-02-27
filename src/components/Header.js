@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { Container, Nav, Link, Logo } from './shared/shared';
+import { Container, Nav, Link, Logo,
+Fade } from './shared/shared';
 import logo from '../assets/logo/logo.svg';
 import { ReactComponent as Out } from '../assets/icons/sign-out.svg';
 import { ReactComponent as Menu} from '../assets/icons/line-menu.svg';
@@ -143,16 +144,6 @@ const MenuIcon = styled(Menu)`
     @media (min-width: 992px) {
         display: none;
     }
-`;
-
-const Fade = styled.div`
-    display: ${props => props.show ? 'block' : 'none'};
-    position: fixed;
-    height: 100%;
-    width: 100%;
-    bottom: 0;
-    left: 0;
-    background-color: rgba(0,0,0,.7);
 `;
 
 const MobileMenu = styled.div`
